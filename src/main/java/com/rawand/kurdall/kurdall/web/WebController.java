@@ -45,19 +45,14 @@ public class WebController {
     ,Model model
     ) {
         try {
-            String textToTranslate = (!userinput.isEmpty()) ? userinput : translation;
+            String textToTranslate =  userinput;
             Translation translatedText = translate.translate(textToTranslate,
                     Translate.TranslateOption.sourceLanguage(translationFrom),
                     Translate.TranslateOption.targetLanguage(translationTo));
 
-            if("en".equals(translationFrom)){
-
                 model.addAttribute("textArea1",textToTranslate);
                 model.addAttribute("textArea2",translatedText.getTranslatedText());
-            } else {
-                model.addAttribute("textArea1",translatedText.getTranslatedText());
-                model.addAttribute("textArea2",textToTranslate);
-            }
+
 
             return "translate";
         } catch (Exception e) {
