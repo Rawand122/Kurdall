@@ -24,13 +24,13 @@
     <button onclick="toggleReadOnly()" id="translationButton" >English to Kurdish</button>
     <form action="/translate" method="POST">
         <p><label for="userinput">English to Kurdish Sorani:</label></p>
-        <textarea id="userinput" name="userinput" rows="4" cols="50" th:text="${initialInput}"></textarea>
+        <textarea id="userinput" name="userinput" rows="4" cols="50" th:text="${textArea1}"></textarea>
         <input type="hidden" id="translationFrom" name="translationFrom" value="en">
         <input type="hidden" id="translationTo" name="translationTo" value="ckb">
         <br>
         <input type="submit" value="Submit">
         <p><label for="translation">English to Kurdish Sorani:</label></p>
-        <textarea id="translation" name="translation" readonly th:text="${text}"></textarea>
+        <textarea id="translation" name="translation" readonly th:text="${textArea2}"></textarea>
     </form>
 
     <p>Please note the above is powered by Google Translation api</p>

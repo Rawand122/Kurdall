@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
@@ -49,8 +49,16 @@ public class WebController {
             Translation translatedText = translate.translate(textToTranslate,
                     Translate.TranslateOption.sourceLanguage(translationFrom),
                     Translate.TranslateOption.targetLanguage(translationTo));
-            model.addAttribute("initialInput",textToTranslate);
-            model.addAttribute("text",translatedText.getTranslatedText());
+
+            if("en".equals(translationFrom)){
+
+                model.addAttribute("textArea1",textToTranslate);
+                model.addAttribute("textArea2",translatedText.getTranslatedText());
+            } else {
+                model.addAttribute("textArea1",translatedText.getTranslatedText());
+                model.addAttribute("textArea2",textToTranslate);
+            }
+
             return "translate";
         } catch (Exception e) {
             e.printStackTrace();
