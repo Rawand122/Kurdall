@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
 public class WebController {
     // standard constructors
 
@@ -29,7 +28,6 @@ public class WebController {
     }
     @GetMapping("/resources")
     public String about(){
-
         return "resources";
     }
     @GetMapping("/contact")
@@ -37,7 +35,6 @@ public class WebController {
         return "contact";
     }
 
-    ///"/{sourceLang}/{targetLang}/{text}"
     @PostMapping("/translate")
     public String translateText(
             @RequestParam String userinput,@RequestParam String translationFrom, @RequestParam String translationTo,
