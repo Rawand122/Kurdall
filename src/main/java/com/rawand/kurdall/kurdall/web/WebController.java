@@ -4,6 +4,9 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
+import com.rawand.kurdall.kurdall.entity.Translations;
+import com.rawand.kurdall.kurdall.repository.TranslationsRepository;
+import com.rawand.kurdall.kurdall.service.TranslationsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +18,11 @@ public class WebController {
     // standard constructors
 
     private final Translate translate;
+    private  final TranslationsRepository translationsRepository;
 
 
-    public WebController() {
+    public WebController(TranslationsService translationsService, TranslationsRepository translationsRepository) {
+        this.translationsRepository = translationsRepository;
         translate = TranslateOptions.newBuilder().setApiKey(System.getenv("apiKey")).build().getService();
     }
 
@@ -46,10 +51,13 @@ public class WebController {
             Translation translatedText = translate.translate(textToTranslate,
                     Translate.TranslateOption.sourceLanguage(translationFrom),
                     Translate.TranslateOption.targetLanguage(translationTo));
-
                 model.addAttribute("textArea1",textToTranslate);
                 model.addAttribute("textArea2",translatedText.getTranslatedText());
+                //add translated requests to
+            Translations translation1 = new Translations(null,textToTranslate,translatedText.getTranslatedText());
+            translationsRepository.save(translation1);
 
+            model.addAttribute("translationsList",translationsRepository.findAll());
 
             return "translate";
         } catch (Exception e) {

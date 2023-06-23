@@ -16,7 +16,7 @@
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </head>
 
-<body>
+<body onload=populateTable("${translationsList}")>
 <div th:replace="~{fragments/navbar :: header}"></div>
 
 <div class="mainSection">
@@ -34,6 +34,20 @@
     </form>
 
     <p>Please note the above is powered by Google Translation api</p>
+    <table>
+        <thead>
+        <tr>
+            <th> Initial input </th>
+            <th> Translation </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="translations : ${translationsList}">
+            <td><span th:text="${translations.initial}"> Initial Input </span></td>
+            <td><span th:text="${translations.result}"> Translation </span></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>

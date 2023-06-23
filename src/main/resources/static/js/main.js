@@ -15,3 +15,22 @@
                    translationTo.value = "ckb"
       }
     }
+
+function populateTable(data) {
+    var tableBody = document.querySelector('#data-table tbody');
+    tableBody.innerHTML = '';
+
+    data.forEach(function(item) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + item.id + '</td>' +
+                        '<td>' + item.name + '</td>' +
+                        '<td>' + item.age + '</td>';
+        // Add more cells based on your data structure
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Access the data attribute passed by the Controller
+var tableData = JSON.parse('{{translationsList | json}}');
+populateTable(tableData);
