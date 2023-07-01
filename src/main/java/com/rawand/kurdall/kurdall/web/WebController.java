@@ -6,7 +6,7 @@ import com.google.cloud.translate.Translation;
 
 import com.rawand.kurdall.kurdall.entity.Translations;
 import com.rawand.kurdall.kurdall.repository.TranslationsRepository;
-import com.rawand.kurdall.kurdall.service.TranslationsService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,8 @@ public class WebController {
     private  final TranslationsRepository translationsRepository;
 
 
-    public WebController(TranslationsService translationsService, TranslationsRepository translationsRepository) {
+
+    public WebController( TranslationsRepository translationsRepository) {
         this.translationsRepository = translationsRepository;
         translate = TranslateOptions.newBuilder().setApiKey(System.getenv("apiKey")).build().getService();
     }
